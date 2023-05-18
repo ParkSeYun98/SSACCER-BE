@@ -5,6 +5,31 @@
 
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoReviewDao">
 
+    <insert id="insertReview" parameterType="VideoReview" useGeneratedKeys="true" keyProperty="reviewSeq">
+        INSERT INTO videoreviews (userSeq, videoSeq, title, content, createdDate, modifiedDate)
+        VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, now(), now());
+    </insert>
 
+    <select id="selectReview" parameterType="int" resultType="VideoReview">
+        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate, DATE_FORMAT(modifiedDate, "%Y:%M:%D %H:%I:%S") AS modifiedDate
+        FROM videoreviews
+        WHERE reviewSeq = #{reviewSeq}
+    </select>
+ 
+    <select id="selectReviewList" resultType="VideoReview">
+        SELEC
+    </select>
+
+    <update id="modifyReview" parameterType="VideoReview">
+
+    </update>
+
+    <delete id="removeReview" parameterType="int">
+
+    </delete>
+
+    <update id="addViewCnt" parameterType="int">
+
+    </update>
 
 </mapper>

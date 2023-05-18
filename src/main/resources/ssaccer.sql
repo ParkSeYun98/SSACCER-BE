@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `ssaccer`.`Videos` (
     AUTO_INCREMENT = 5
     DEFAULT CHARACTER SET = utf8;
 
-
 -- -----------------------------------------------------
 -- Table `ssaccer`.`Users`
 -- -----------------------------------------------------
@@ -71,8 +70,6 @@ CREATE TABLE IF NOT EXISTS `ssaccer`.`VideoLikes` (
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-USE `ssaccer` ;
-
 -- -----------------------------------------------------
 -- Table `ssaccer`.`VideoReviews`
 -- -----------------------------------------------------
@@ -103,7 +100,23 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+-- insert --
+
+INSERT INTO Videos (youtubeId, title, url, channelName)
+VALUES
+    ("u5OgcZdNbMo", "저는 하체 식주의자 입니다", "https://www.youtube.com/embed/u5OgcZdNbMo", "GYM종국");
+
+INSERT INTO users (userId, password, name, nickname, role)
+VALUES
+    ("ssafy", "1234", "박세윤", "Yun", "관리자");
+
+INSERT INTO videoreviews (userSeq, videoSeq, title, content, createdDate, modifiedDate)
+VALUES
+    (5, 5, "놀랍네요", "감명받았습니다..", "2023-05-17 15:12:11", "2023-05-18 09:45:17");
+
+-- select --
+
 SELECT * FROM users;
-SELECT * FROM video_reviews;
+SELECT * FROM videoreviews;
 SELECT * FROM videolikes;
 SELECT * FROM videos;

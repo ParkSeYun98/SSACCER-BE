@@ -5,33 +5,42 @@
 
 <mapper namespace="com.ssafy.ssaccer.model.dao.UserDao">
 
-    <insert id="insertUser" parameterType="User">
-        INSERT INTO users (userId, password, name, nickname, role)
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userSeq">
+        INSERT INTO Users (userId, password, name, nickname, role)
         VALUES (#{userID}, #{password}, #{name}, #{nickname}, #{role})
     </insert>
 
     <select id="selectUserByUserId" parameterType="String" resultType="User">
-
+        SELECT userSeq, userId, password, name, nickname, role
+        FROM Users
+        WHERE userId = #{userId}
     </select>
 
-    <select id="selectUserByUserSeq" parameterType="Integer" resultType="User">
-
+    <select id="selectUserByUserSeq" parameterType="int" resultType="User">
+        SELECT userSeq, userId, password, name, nickname, role
+        FROM Users
+        WHERE userSeq = #{userSeq}
     </select>
 
     <select id="selectUserList" resultType="User">
-
+        SELECT userSeq, userId, password, name, nickname, role
+        FROM Users
     </select>
 
     <update id="modifyUser" parameterType="User">
-
+        UPDATE Users
+        SET name = #{name}, nickname = #{nickname}
+        WHERE userSeq = #{userSeq}
     </update>
 
     <delete id="removeUserByUserId" parameterType="String">
-
+        DELETE FROM Users
+        WHERE userId = #{userId}
     </delete>
 
     <delete id="removeUserByUserSeq" parameterType="Integer">
-
+        DELETE FROM Users
+        WHERE userSeq = #{userSeq}
     </delete>
 
 </mapper>
