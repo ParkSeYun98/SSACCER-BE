@@ -26,7 +26,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("SSACCER REST API SWAGGER")
                 .description("SSACCER Project REST API")
-                .version("0.1")
+                .version("0.2")
                 .build();
     }
 }

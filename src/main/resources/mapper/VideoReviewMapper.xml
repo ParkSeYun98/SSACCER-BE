@@ -5,31 +5,43 @@
 
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoReviewDao">
 
-    <insert id="insertReview" parameterType="VideoReview" useGeneratedKeys="true" keyProperty="reviewSeq">
-        INSERT INTO videoreviews (userSeq, videoSeq, title, content, createdDate, modifiedDate)
-        VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, now(), now());
+    <insert id="insertReview" parameterType="VideoReview">
+        INSERT INTO Reviews (userSeq, videoSeq, title, content, createdDate)
+        VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, now());
     </insert>
 
     <select id="selectReview" parameterType="int" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate, DATE_FORMAT(modifiedDate, "%Y:%M:%D %H:%I:%S") AS modifiedDate
-        FROM videoreviews
+        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        FROM Reviews
         WHERE reviewSeq = #{reviewSeq}
     </select>
  
     <select id="selectReviewList" resultType="VideoReview">
-        SELEC
+        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        FROM Reviews
+    </select>
+
+    <select id="selectReviewListByVideoSeq">
+        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        FROM Reviews
+        WHERE videoSeq = #{videoSeq}
     </select>
 
     <update id="modifyReview" parameterType="VideoReview">
-
+        UPDATE Reviews
+        SET title = #{title}, content = #{content}
+        WHERE reviewSeq = #{reviewSeq}
     </update>
 
     <delete id="removeReview" parameterType="int">
-
+        DELETE FROM Reviews
+        WHERE reviewSeq = #{reviewSeq}
     </delete>
 
     <update id="addViewCnt" parameterType="int">
-
+        UPDATE Reviews
+        SET viewCnt = viewCnt + 1
+        WHERE reviewSeq = #{reviewSeq}
     </update>
 
 </mapper>

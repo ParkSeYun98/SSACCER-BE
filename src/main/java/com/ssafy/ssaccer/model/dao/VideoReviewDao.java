@@ -16,6 +16,8 @@ public interface VideoReviewDao {
 
     List<VideoReview> selectReviewList();
 
+    List<VideoReview> selectReviewListByVideoSeq(int videoSeq);
+
     int modifyReview(VideoReview review);
 
     int removeReview(int reviewSeq);

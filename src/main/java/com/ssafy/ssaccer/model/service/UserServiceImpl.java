@@ -13,46 +13,46 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    private final UserDao dao;
 
     @Override
     public int createUser(User user) {
-        return userDao.insertUser(user);
+        return dao.insertUser(user);
     }
 
     @Override
     public User readUserByUserId(String userId) {
-        return userDao.selectUserByUserId(userId);
+        return dao.selectUserByUserId(userId);
     }
 
     @Override
     public User readUserByUserSeq(int userSeq) {
-        return userDao.selectUserByUserSeq(userSeq);
+        return dao.selectUserByUserSeq(userSeq);
     }
 
     @Override
     public List<User> readUserList() {
-        return userDao.selectUserList();
+        return dao.selectUserList();
     }
 
     @Override
     public int updateUser(User user) {
-        return userDao.modifyUser(user);
+        return dao.modifyUser(user);
     }
 
     @Override
     public int deleteUserByUserId(String userId) {
-        return userDao.removeUserByUserId(userId);
+        return dao.removeUserByUserId(userId);
     }
 
     @Override
     public int deleteUserByUserSeq(int userSeq) {
-        return userDao.removeUserByUserSeq(userSeq);
+        return dao.removeUserByUserSeq(userSeq);
     }
 
     @Override
     public User login(User user) {
-        User loginUser = userDao.selectUserByUserSeq(user.getUserSeq());
+        User loginUser = dao.selectUserByUserSeq(user.getUserSeq());
 
         if(loginUser != null && loginUser.getPassword().equals(user.getPassword()))
             return loginUser;

@@ -24,6 +24,4 @@ public class VideoReview {
     private int viewCnt;
 
     private String createdDate;
-
-    private String modifiedDate;
 }

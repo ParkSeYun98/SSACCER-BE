@@ -6,12 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@ApiModel(value = "VideoLike DTO")
+@ApiModel(value = "VideoReviewLike DTO")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-public class VideoLike {
+public class VideoReviewLike {
 
-    private int reviewSeq;
+    private int likeSeq;
 
     private int userSeq;
+
+    private int reviewSeq;
 }

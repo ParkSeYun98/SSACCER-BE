@@ -22,4 +22,12 @@ public class User {
     private String nickname;
 
     private Role role;
+
+    private Position position;
+
+    private String phoneNumber;
+
+    private String img;
+
+    private String orgimg;
 }

@@ -13,35 +13,41 @@ import java.util.List;
 @Service
 public class VideoReviewServiceImpl implements VideoReviewService {
 
-    private final VideoReviewDao videoReviewDao;
+    private final VideoReviewDao dao;
+
 
     @Override
     public int createReview(VideoReview review) {
-        return videoReviewDao.insertReview(review);
+        return dao.insertReview(review);
     }
 
     @Override
-    public VideoReview readReviewByReviewSeq(int reviewSeq) {
-        return videoReviewDao.selectReview(reviewSeq);
+    public VideoReview readReview(int reviewSeq) {
+        return dao.selectReview(reviewSeq);
     }
 
     @Override
     public List<VideoReview> readReviewList() {
-        return videoReviewDao.selectReviewList();
+        return dao.selectReviewList();
+    }
+
+    @Override
+    public List<VideoReview> readReviewListByVideoSeq(int videoSeq) {
+        return dao.selectReviewListByVideoSeq(videoSeq);
     }
 
     @Override
     public int updateReview(VideoReview review) {
-        return videoReviewDao.modifyReview(review);
+        return dao.modifyReview(review);
     }
 
     @Override
-    public int deleteReviewByReviewSeq(int reviewSeq) {
-        return videoReviewDao.removeReview(reviewSeq);
+    public int deleteReview(int reviewSeq) {
+        return dao.removeReview(reviewSeq);
     }
 
     @Override
-    public int addViewCntByReviewSeq(int reviewSeq) {
-        return videoReviewDao.addViewCnt(reviewSeq);
+    public int addViewCnt(int reviewSeq) {
+        return dao.addViewCnt(reviewSeq);
     }
 }

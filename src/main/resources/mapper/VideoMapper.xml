@@ -5,25 +5,25 @@
 
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoDao">
 
-    <insert id="insertVideo" parameterType="Video" useGeneratedKeys="true" keyProperty="videoSeq">
+    <insert id="insertVideo" parameterType="Video">
         INSERT INTO Videos (youtubeId, title, url, channelName)
         VALUES (#{youtubeId}, #{title}, #{url}, #{channelName})
     </insert>
 
     <select id="selectVideoByYoutubeId" parameterType="String" resultType="Video">
-        SELECT videoSeq, youtubeId, title, url, channelName
+        SELECT *
         FROM Videos
         WHERE youtubeId = #{youtubeId}
     </select>
 
     <select id="selectVideoByVideoSeq" parameterType="int" resultType="Video">
-        SELECT videoSeq, youtubeId, title, url, channelName
+        SELECT *
         FROM Videos
         WHERE videoSeq = #{videoSeq}
     </select>
 
     <select id="selectVideoList" resultType="Video">
-        SELECT videoSeq, youtubeId, title, url, channelName
+        SELECT *
         FROM Videos
     </select>
 

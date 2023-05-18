@@ -13,40 +13,40 @@ import java.util.List;
 @Service
 public class VideoServiceImpl implements VideoService {
 
-    private final VideoDao videoDao;
+    private final VideoDao dao;
 
     @Override
     public int createVideo(Video video) {
-        return videoDao.insertVideo(video);
+        return dao.insertVideo(video);
     }
 
     @Override
     public Video readVideoByYoutubeId(String youtubeId) {
-        return videoDao.selectVideoByYoutubeId(youtubeId);
+        return dao.selectVideoByYoutubeId(youtubeId);
     }
 
     @Override
     public Video readVideoByVideoSeq(int videoSeq) {
-        return videoDao.selectVideoByVideoSeq(videoSeq);
+        return dao.selectVideoByVideoSeq(videoSeq);
     }
 
     @Override
     public List<Video> readVideoList() {
-        return videoDao.selectVideoList();
+        return dao.selectVideoList();
     }
 
     @Override
     public int updateVideo(Video video) {
-        return videoDao.modifyVideo(video);
+        return dao.modifyVideo(video);
     }
 
     @Override
     public int deleteVideoByYoutubeId(String youtubeId) {
-        return videoDao.removeVideoByYoutubeId(youtubeId);
+        return dao.removeVideoByYoutubeId(youtubeId);
     }
 
     @Override
     public int deleteVideoByVideoSeq(int videoSeq) {
-        return videoDao.removeVideoByVideoSeq(videoSeq);
+        return dao.removeVideoByVideoSeq(videoSeq);
     }
 }

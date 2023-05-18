@@ -10,13 +10,15 @@ public interface VideoReviewService {
 
     int createReview(VideoReview review);
 
-    VideoReview readReviewByReviewSeq(int reviewSeq);
+    VideoReview readReview(int reviewSeq);
 
     List<VideoReview> readReviewList();
 
+    List<VideoReview> readReviewListByVideoSeq(int videoSeq);
+
     int updateReview(VideoReview review);
 
-    int deleteReviewByReviewSeq(int reviewSeq);
+    int deleteReview(int reviewSeq);
 
-    int addViewCntByReviewSeq(int reviewSeq);
+    int addViewCnt(int reviewSeq);
 }
