@@ -23,14 +23,17 @@ public class VideoRestController {
     @ApiOperation(value = "영상 등록", notes = "영상을 클릭하여 상세 페이지로 넘어 갈 때 DB에 저장 - 중복 체크 필요")
     @PostMapping("/regist")
     public ResponseEntity<?> registVideo(@RequestBody Video video) {
+        System.out.println(video);
+        System.out.println(video.getChannelName());
+        System.out.println(video.getYoutubeId());
 
         try {
             int result = vService.createVideo(video);
 
             if(result != 0)
-                return new ResponseEntity<>(result, HttpStatus.OK);
+                return new ResponseEntity<Integer>(result, HttpStatus.OK);
             else
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         } catch(Exception e) {
             return exceptionHandling(e);
         }
