@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(User user) {
-        User loginUser = dao.selectUserByUserSeq(user.getUserSeq());
+        User loginUser = dao.selectUserByUserId(user.getUserId());
 
         if(loginUser != null && loginUser.getPassword().equals(user.getPassword()))
             return loginUser;

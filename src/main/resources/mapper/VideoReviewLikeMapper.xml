@@ -15,7 +15,7 @@
         FROM Reviews vr
         JOIN RLikes vrl
         ON vr.reviewSeq = vrl.reviewSeq
-        WHERE userSeq = #{userSeq}
+        WHERE vrl.userSeq = #{userSeq}
     </select>
 
     <select id="selectLikeByReviewSeq" parameterType="int" resultType="User">
@@ -23,7 +23,7 @@
         FROM Users u
         JOIN RLikes vrl
         ON u.userSeq = vrl.userSeq
-        WHERE reviewSeq = #{reviewSeq}
+        WHERE vrl.reviewSeq = #{reviewSeq}
     </select>
 
     <delete id="cancelLike" parameterType="HashMap">

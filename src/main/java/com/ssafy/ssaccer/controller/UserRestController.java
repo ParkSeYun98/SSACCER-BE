@@ -2,6 +2,7 @@ package com.ssafy.ssaccer.controller;
 
 import com.ssafy.ssaccer.model.dto.User;
 import com.ssafy.ssaccer.model.service.UserService;
+import com.ssafy.ssaccer.util.JwtUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 @ApiModel(value="User RestController")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET , RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -17,6 +21,8 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
+
+	private final JwtUtil jwtUtil;
 
     private final UserService uService;
 
@@ -36,6 +42,40 @@ public class UserRestController {
 			return exceptionHandling(e);
 		}
 	}
+	
+//	@ApiOperation(value = "로그인", notes = "jwt 활용 / user 객체를 받음")
+//	@PostMapping("/login")
+//	public ResponseEntity<Map<String, Object>> login(User user) {
+//		Map<String, Object> result = new HashMap<String, Object>();
+//
+//		HttpStatus status = null;
+//
+//		// user를 이용해서 service -> dao -> db를 통해 실제 유저인지 확인해야하는데 그거는 직접 하셈
+//		User loginUser = uService.login(user);
+//
+//		if(loginUser == null)
+//			throw new IllegalArgumentException("로그인 유저 검사했는데 null로 나옴");
+//
+//		System.out.println(loginUser.getName());
+//		// 아이디가 널이 아니거나 길이가 있거나
+//		try {
+//			if(user.getUserId() != null || user.getUserId().length() > 0) {
+//				result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
+//				result.put("username", loginUser.getName());
+//				result.put("message", "SUCCESS");
+//				status = HttpStatus.ACCEPTED;
+//			}
+//			else {
+//				result.put("message", "FAIL");
+//				status = HttpStatus.NO_CONTENT;
+//			}
+//		} catch(UnsupportedEncodingException e) {
+//			result.put("message", "FAIL");
+//			status = HttpStatus.INTERNAL_SERVER_ERROR;
+//		}
+//
+//		return new ResponseEntity<Map<String,Object>>(result, status);
+//	}
 
 	@ApiOperation(value = "로그아웃")
 	@GetMapping("/logout")

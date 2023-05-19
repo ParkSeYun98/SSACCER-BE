@@ -45,7 +45,7 @@ public class VideoReviewLikeRestController {
     }
     
     @ApiOperation(value = "좋아요 취소")
-    @DeleteMapping("/unlike/{userSeq}/{videoSeq}")
+    @DeleteMapping("/unlike/{userSeq}/{reviewSeq}")
     public ResponseEntity<?> unlike(@PathVariable int userSeq, @PathVariable int reviewSeq) {
 
         try {

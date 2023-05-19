@@ -37,22 +37,6 @@ public class VideoReviewRestController {
         }
     }
 
-    @ApiOperation(value = "특정 리뷰 조회")
-    @GetMapping("/read/{reviewSeq}")
-    public ResponseEntity<?> searchReview(@PathVariable int reviewSeq) {
-
-        try {
-            VideoReview review = rService.readReview(reviewSeq);
-
-            if(review != null)
-                return new ResponseEntity<VideoReview>(review, HttpStatus.OK);
-            else
-                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-        } catch(Exception e) {
-            return exceptionHandling(e);
-        }
-    }
-
     @ApiOperation(value = "전체 리뷰 리스트 조회")
     @GetMapping("/read/list")
     public ResponseEntity<?> selectReviewList() {
@@ -68,14 +52,47 @@ public class VideoReviewRestController {
             return exceptionHandling(e);
         }
     }
+
+    @ApiOperation(value = "특정 리뷰 조회")
+    @GetMapping("/read/{reviewSeq}")
+    public ResponseEntity<?> searchReview(@PathVariable int reviewSeq) {
+
+        try {
+            VideoReview review = rService.readReview(reviewSeq);
+
+            if(review != null)
+                return new ResponseEntity<VideoReview>(review, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
     
     @ApiOperation(value = "영상에 해당하는 리뷰 리스트 조회")
-    @GetMapping("/read/list/{videoSeq}")
+    @GetMapping("/readbyvideoseq/list/{videoSeq}")
 
     public ResponseEntity<?> selectReviewListByVideoSeq(@PathVariable int videoSeq) {
 
         try {
             List<VideoReview> reviewList = rService.readReviewListByVideoSeq(videoSeq);
+
+            if(reviewList != null)
+                return new ResponseEntity<List<VideoReview>>(reviewList, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
+    @ApiOperation(value = "특정 유저가 작성한 리뷰 리스트 조회")
+    @GetMapping("/readbyuserseq/list/{userSeq}")
+
+    public ResponseEntity<?> selectReviewListByUserSeq(@PathVariable int userSeq) {
+
+        try {
+            List<VideoReview> reviewList = rService.readReviewListByVideoSeq(userSeq);
 
             if(reviewList != null)
                 return new ResponseEntity<List<VideoReview>>(reviewList, HttpStatus.OK);
