@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @ApiModel(value = "User DTO")
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor 
 @Getter @Setter
 public class User {
 

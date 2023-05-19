@@ -4,6 +4,8 @@ import com.ssafy.ssaccer.model.dao.VideoReviewDao;
 import com.ssafy.ssaccer.model.dto.VideoReview;
 import io.swagger.annotations.ApiModel;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class VideoReviewServiceImpl implements VideoReviewService {
-
+	
+	
     private final VideoReviewDao dao;
 
 

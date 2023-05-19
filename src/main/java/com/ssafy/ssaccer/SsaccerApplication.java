@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SsaccerApplication {
 
+	
     public static void main(String[] args) {
         SpringApplication.run(SsaccerApplication.class, args);
     }
 
-}
+}   

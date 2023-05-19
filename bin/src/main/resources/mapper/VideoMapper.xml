@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.ssaccer.model.dao.VideoDao">
+
+    <insert id="insertVideo" parameterType="Video">
+        INSERT INTO Videos (youtubeId, title, url, channelName)
+        VALUES (#{youtubeId}, #{title}, #{url}, #{channelName})
+    </insert>
+
+    <select id="selectVideoByYoutubeId" parameterType="String" resultType="Video">
+        SELECT *
+        FROM Videos
+        WHERE youtubeId = #{youtubeId}
+    </select>
+
+    <select id="selectVideoByVideoSeq" parameterType="int" resultType="Video">
+        SELECT *
+        FROM Videos
+        WHERE videoSeq = #{videoSeq}
+    </select>
+
+    <select id="selectVideoList" resultType="Video">
+        SELECT *
+        FROM Videos
+    </select>
+
+    <update id="modifyVideo" parameterType="Video">
+        UPDATE Videos
+        SET channelName = #{channelName}
+        WHERE videoSeq = #{videoSeq}
+    </update>
+
+    <delete id="removeVideoByYoutubeId" parameterType="String">
+        DELETE FROM Videos
+        WHERE youtubeId = #{youtubeId}
+    </delete>
+
+    <delete id="removeVideoByVideoSeq" parameterType="int">
+        DELETE FROM Videos
+        WHERE videoSeq = #{videoSeq}
+    </delete>
+
+</mapper>
