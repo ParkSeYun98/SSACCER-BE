@@ -21,6 +21,8 @@ public class VideoReview {
 
     private String content;
 
+    private String writer;
+
     private int viewCnt;
 
     private String createdDate;

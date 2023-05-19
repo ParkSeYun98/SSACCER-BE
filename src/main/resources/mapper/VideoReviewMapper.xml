@@ -6,23 +6,23 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoReviewDao">
 
     <insert id="insertReview" parameterType="VideoReview">
-        INSERT INTO Reviews (userSeq, videoSeq, title, content, createdDate)
-        VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, now());
+        INSERT INTO Reviews (userSeq, videoSeq, title, content, writer, createdDate)
+        VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, #{writer}, now());
     </insert>
 
     <select id="selectReview" parameterType="int" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
         FROM Reviews
         WHERE reviewSeq = #{reviewSeq}
     </select>
  
     <select id="selectReviewList" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
         FROM Reviews
     </select>
 
-    <select id="selectReviewListByVideoSeq" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+    <select id="selectReviewListByVideoSeq" parameterType="int" resultType="VideoReview">
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
         FROM Reviews
         WHERE videoSeq = #{videoSeq}
     </select>

@@ -56,12 +56,11 @@ public class UserRestController {
 		if(loginUser == null)
 			throw new IllegalArgumentException("로그인 유저 검사했는데 null로 나옴");
 
-		System.out.println(loginUser.getName());
 		// 아이디가 널이 아니거나 길이가 있거나
 		try {
 			if(user.getUserId() != null || user.getUserId().length() > 0) {
 				result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
-				result.put("username", loginUser.getName());
+				result.put("loginUser", loginUser);
 				result.put("message", "SUCCESS");
 				status = HttpStatus.ACCEPTED;
 			}

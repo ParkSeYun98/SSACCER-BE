@@ -23,9 +23,6 @@ public class VideoRestController {
     @ApiOperation(value = "영상 등록", notes = "영상을 클릭하여 상세 페이지로 넘어 갈 때 DB에 저장 - 중복 체크 필요")
     @PostMapping("/regist")
     public ResponseEntity<?> registVideo(@RequestBody Video video) {
-        System.out.println(video);
-        System.out.println(video.getChannelName());
-        System.out.println(video.getYoutubeId());
 
         try {
             int result = vService.createVideo(video);
@@ -39,12 +36,28 @@ public class VideoRestController {
         }
     }
 
-    @ApiOperation(value = "특정 영상 조회")
-    @GetMapping("/read/{videoSeq}")
+    @ApiOperation(value = "특정 영상 조회 - videoSeq")
+    @GetMapping("/readbyvideoSeq/{videoSeq}")
     public ResponseEntity<?> getVideoById(@PathVariable int videoSeq) {
 
         try {
             Video video = vService.readVideoByVideoSeq(videoSeq);
+
+            if(video != null)
+                return new ResponseEntity<Video>(video, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
+    @ApiOperation(value = "특정 영상 조회 - youtubeId")
+    @GetMapping("/readbyyoutubeId/{youtubeId}")
+    public ResponseEntity<?> getVideoById(@PathVariable String youtubeId) {
+
+        try {
+            Video video = vService.readVideoByYoutubeId(youtubeId);
 
             if(video != null)
                 return new ResponseEntity<Video>(video, HttpStatus.OK);
