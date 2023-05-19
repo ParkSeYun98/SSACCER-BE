@@ -21,7 +21,7 @@
         FROM Reviews
     </select>
 
-    <select id="selectReviewListByVideoSeq">
+    <select id="selectReviewListByVideoSeq" resultType="VideoReview">
         SELECT reviewSeq, userSeq, videoSeq, title, content, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
         FROM Reviews
         WHERE videoSeq = #{videoSeq}

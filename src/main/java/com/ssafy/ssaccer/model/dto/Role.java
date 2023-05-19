@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "Role Enum")
 public enum Role {
-    Admin, UNRANKED, Bronze, Silver, Gold, Platinum, Diamond, Ruby
+    ADMIN, UNRANKED, BRONZE, SILVER, GOLD, PLATINUM, DIAMOND, RUBY
 }
 
 
