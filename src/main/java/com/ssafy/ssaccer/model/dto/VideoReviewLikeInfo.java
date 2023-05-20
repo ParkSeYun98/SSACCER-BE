@@ -20,9 +20,28 @@ public class VideoReviewLikeInfo {
 
 
     // users 테이블
-//    private String
+    private String name;
 
+    private String nickname;
+
+    private Role role;
+
+    private Position position;
+
+    private String phoneNumber;
+
+    private String img;
+
+    private String orgimg;
 
     // reviews 테이블
+    private String title;
 
+    private String content;
+
+    private String writer;
+
+    private int viewCnt;
+
+    private String createdDate;
 }

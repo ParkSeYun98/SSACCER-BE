@@ -10,17 +10,17 @@
         VALUES (#{userSeq}, #{reviewSeq})
     </insert>
 
-    <select id="selectReviewLike" parameterType="HashMap" resultType="VideoReviewLike">
+    <select id="selectReviewLike" parameterType="HashMap" resultType="VideoReviewLikeInfo">
         SELECT
-        rl.*,
-        r.title, r.content, r.writer, r.viewCnt, r.createdDate,
-        u.name, u.nickname, u.role, u.position, u.phoneNumber, u.img, u.orgimg
+        rl.likeSeq as likeSeq, rl.userSeq as userSeq, rl.reviewSeq as reviewSeq,
+        r.title as title, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
+        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg
         FROM RLikes rl
         JOIN reviews r
         ON rl.reviewSeq = r.reviewSeq
         JOIN users u
         ON rl.userSeq = u.userSeq
-        WHERE rl.userSeq = #{userSeq}, rl.reviewSeq = #{reviewSeq}
+        WHERE rl.userSeq = #{userSeq} AND rl.reviewSeq = #{reviewSeq}
     </select>
 
     <select id="selectLikeByUserSeq" parameterType="int" resultType="VideoReview">
