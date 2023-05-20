@@ -123,11 +123,11 @@ public class UserRestController {
 	}
 	
 	@ApiOperation(value = "회원 탈퇴")
-	@DeleteMapping("/quit/{userSeq}")
-	public ResponseEntity<?> quit(@PathVariable int userSeq) {
+	@DeleteMapping("/quit/{userId}")
+	public ResponseEntity<?> quit(@PathVariable String userId) {
 
 		try {
-			int result = uService.deleteUserByUserSeq(userSeq);
+			int result = uService.deleteUserByUserId(userId);
 
 			if(result != 0)
 				return new ResponseEntity<Integer>(result, HttpStatus.OK);

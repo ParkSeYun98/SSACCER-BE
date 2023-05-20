@@ -21,12 +21,12 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     // Interceptor Bean 등록
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/swagger-resources/**", "/swagger-ui/**", "/v2/api-docs"
-                                ,"/user/login", "/user/logout", "/user/signup"
-                );
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
+//                .excludePathPatterns(
+//                        "/swagger-resources/**", "/swagger-ui/**", "/v2/api-docs"
+//                                ,"/user/login", "/user/logout", "/user/signup"
+//                );
+//    }
 }
