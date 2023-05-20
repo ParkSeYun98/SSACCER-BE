@@ -10,6 +10,19 @@
         VALUES (#{userSeq}, #{reviewSeq})
     </insert>
 
+    <select id="selectReviewLike" parameterType="HashMap" resultType="VideoReviewLike">
+        SELECT
+        rl.*,
+        r.title, r.content, r.writer, r.viewCnt, r.createdDate,
+        u.name, u.nickname, u.role, u.position, u.phoneNumber, u.img, u.orgimg
+        FROM RLikes rl
+        JOIN reviews r
+        ON rl.reviewSeq = r.reviewSeq
+        JOIN users u
+        ON rl.userSeq = u.userSeq
+        WHERE rl.userSeq = #{userSeq}, rl.reviewSeq = #{reviewSeq}
+    </select>
+
     <select id="selectLikeByUserSeq" parameterType="int" resultType="VideoReview">
         SELECT *
         FROM Reviews vr

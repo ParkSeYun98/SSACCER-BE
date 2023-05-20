@@ -3,6 +3,7 @@ package com.ssafy.ssaccer.model.service;
 import com.ssafy.ssaccer.model.dao.VideoReviewLikeDao;
 import com.ssafy.ssaccer.model.dto.User;
 import com.ssafy.ssaccer.model.dto.VideoReview;
+import com.ssafy.ssaccer.model.dto.VideoReviewLike;
 import io.swagger.annotations.ApiModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,11 @@ public class VideoReviewLikeServiceImpl implements VideoReviewLikeService {
     @Override
     public int createLike(HashMap<String, Integer> map) {
         return dao.addLike(map);
+    }
+
+    @Override
+    public VideoReviewLike readReviewLike(HashMap<String, Integer> map) {
+        return dao.selectReviewLike(map);
     }
 
     @Override

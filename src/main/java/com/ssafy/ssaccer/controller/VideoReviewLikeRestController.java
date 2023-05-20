@@ -2,6 +2,7 @@ package com.ssafy.ssaccer.controller;
 
 import com.ssafy.ssaccer.model.dto.User;
 import com.ssafy.ssaccer.model.dto.VideoReview;
+import com.ssafy.ssaccer.model.dto.VideoReviewLike;
 import com.ssafy.ssaccer.model.service.VideoReviewLikeService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -60,6 +61,28 @@ public class VideoReviewLikeRestController {
                 return new ResponseEntity<>(result, HttpStatus.OK);
             else
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
+    @ApiOperation(value = "특정 리뷰 좋아요 여부")
+    @GetMapping("/reviewlike/{userSeq}/{reviewSeq}")
+    public ResponseEntity<?> getUserLikeList(@PathVariable int userSeq, @PathVariable int reviewSeq) {
+
+        try {
+            HashMap<String, Integer> map = new HashMap<>();
+
+            map.put("userSeq", userSeq);
+            map.put("reviewSeq", reviewSeq);
+
+            VideoReviewLike reviewLike = lService.readReviewLike(map);
+
+            if(reviewLike != null)
+                return new ResponseEntity<VideoReviewLike>(reviewLike, HttpStatus.OK);
+            else
+                System.out.println("테이블에 내용물이 없습니다.");
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {
             return exceptionHandling(e);
         }

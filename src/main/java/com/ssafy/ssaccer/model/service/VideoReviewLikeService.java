@@ -2,6 +2,7 @@ package com.ssafy.ssaccer.model.service;
 
 import com.ssafy.ssaccer.model.dto.User;
 import com.ssafy.ssaccer.model.dto.VideoReview;
+import com.ssafy.ssaccer.model.dto.VideoReviewLike;
 import io.swagger.annotations.ApiModel;
 
 import java.util.HashMap;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface VideoReviewLikeService {
 
     int createLike(HashMap<String, Integer> map);
+
+    VideoReviewLike readReviewLike(HashMap<String, Integer> map);
 
     List<VideoReview> readLikeByUserSeq(int userSeq);
 
