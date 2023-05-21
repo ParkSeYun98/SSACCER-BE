@@ -48,6 +48,8 @@ public class VideoReviewLikeInfo {
     // videos 테이블
     private int videoSeq;
 
+    private String youtubeId;
+
     private String videoTitle;
 
     private String channelName;
