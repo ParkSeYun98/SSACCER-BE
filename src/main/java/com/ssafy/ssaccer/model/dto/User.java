@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @ApiModel(value = "User DTO")
 @NoArgsConstructor @AllArgsConstructor 
@@ -30,4 +31,6 @@ public class User {
     private String img;
 
     private String orgimg;
+
+    private MultipartFile file;
 }

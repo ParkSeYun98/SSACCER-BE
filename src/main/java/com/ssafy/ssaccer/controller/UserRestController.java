@@ -6,13 +6,20 @@ import com.ssafy.ssaccer.util.JwtUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ApiModel(value="User RestController")
@@ -25,6 +32,8 @@ public class UserRestController {
 	private final JwtUtil jwtUtil;
 
     private final UserService uService;
+
+	private final ResourceLoader resLoader;
     
 //	@ApiOperation(value = "로그인", notes = "token 없이 로그인 / user 객체를 받음")
 //	@PostMapping("/login")
@@ -151,6 +160,52 @@ public class UserRestController {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 		catch(Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
+	@ApiOperation(value = "회원 이미지 업로드")
+	@PutMapping("/uploadimage/{userSeq}")
+	public ResponseEntity<?> uploadImage(HttpServletRequest request, @PathVariable int userSeq, @RequestParam("img") MultipartFile file) {
+
+		try {
+			User user = null;
+
+			if(file != null && file.getSize() > 0) {
+				Resource res = resLoader.getResource("");
+
+				if(!res.getFile().exists())
+					res.getFile().mkdir();
+
+				List<User> list = uService.readUserList();
+
+				for(int i=0; i<list.size(); i++) {
+					if(list.get(i).getUserSeq() == userSeq)
+						user = list.get(i);
+				}
+
+				String replacedPath = res.getFile().toString().replace("\\", "/");
+
+				if(user != null) {
+					user.setImg(replacedPath + System.currentTimeMillis() + "_" + file.getOriginalFilename());
+					user.setOrgimg(file.getOriginalFilename());
+
+					file.transferTo(new File(user.getImg()));
+				}
+			}
+
+//			String path = "@/assets/upload";
+
+//			user.setImg()
+
+			int result = uService.updateUser(user);
+
+			if(result != 0) {
+				return new ResponseEntity<Integer>(result, HttpStatus.OK);
+			}
+			else
+				return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch(Exception e) {
 			return exceptionHandling(e);
 		}
 	}

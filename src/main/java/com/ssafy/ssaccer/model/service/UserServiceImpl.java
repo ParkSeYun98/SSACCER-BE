@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserService {
 
         return null;
     }
+
+    @Override
+    public int uploadImage(int userSeq) {
+        return dao.uploadImage(userSeq);
+    }
 }

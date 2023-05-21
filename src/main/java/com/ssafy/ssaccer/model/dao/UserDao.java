@@ -23,4 +23,6 @@ public interface UserDao {
     int removeUserByUserId(String userId);
 
     int removeUserByUserSeq(int userSeq);
+
+    int uploadImage(int userSeq);
 }

@@ -23,4 +23,6 @@ public interface UserService {
     int deleteUserByUserSeq(int userSeq);
 
     User login(User user);
+
+    int uploadImage(int userSeq);
 }

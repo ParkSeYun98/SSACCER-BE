@@ -7,8 +7,8 @@
 
     <insert id="insertUser" parameterType="User">
 
-        INSERT INTO Users (userId, password, name, nickname, position, phoneNumber, img, orgimg)
-        VALUES (#{userId}, #{password}, #{name}, #{nickname}, #{position}, #{phoneNumber}, #{img}, #{orgimg})
+        INSERT INTO Users (userId, password, name, nickname, position, phoneNumber, img)
+        VALUES (#{userId}, #{password}, #{name}, #{nickname}, #{position}, #{phoneNumber}, #{img})
 
     </insert>
 
@@ -31,7 +31,7 @@
 
     <update id="modifyUser" parameterType="User">
         UPDATE Users
-        SET name = #{name}, nickname = #{nickname}, position = #{position}, phoneNumber = #{phoneNumber}, img = #{img}, orgimg = #{orgimg}
+        SET name = #{name}, nickname = #{nickname}, position = #{position}, phoneNumber = #{phoneNumber}, img = #{img}
         WHERE userSeq = #{userSeq}
     </update>
 
@@ -44,5 +44,11 @@
         DELETE FROM Users
         WHERE userSeq = #{userSeq}
     </delete>
+
+    <update id="uploadImage" parameterType="String">
+        UPDATE Users
+        SET img = #{img}
+        WHERE userSeq = #{userSeq}
+    </update>
 
 </mapper>
