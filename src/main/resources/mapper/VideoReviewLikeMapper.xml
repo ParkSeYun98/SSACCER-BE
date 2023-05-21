@@ -13,30 +13,49 @@
     <select id="selectReviewLike" parameterType="HashMap" resultType="VideoReviewLikeInfo">
         SELECT
         rl.likeSeq as likeSeq, rl.userSeq as userSeq, rl.reviewSeq as reviewSeq,
-        r.title as title, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
-        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg
+        r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
+        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
+        r.videoSeq as videoSeq, v.title as videoTitle, v.channelName as channelName
         FROM RLikes rl
         JOIN reviews r
         ON rl.reviewSeq = r.reviewSeq
         JOIN users u
         ON rl.userSeq = u.userSeq
+        JOIN videos v
+        ON r.videoSeq = v.videoSeq
         WHERE rl.userSeq = #{userSeq} AND rl.reviewSeq = #{reviewSeq}
     </select>
 
-    <select id="selectLikeByUserSeq" parameterType="int" resultType="VideoReview">
-        SELECT *
-        FROM Reviews vr
-        JOIN RLikes vrl
-        ON vr.reviewSeq = vrl.reviewSeq
-        WHERE vrl.userSeq = #{userSeq}
+    <select id="selectLikeByUserSeq" parameterType="int" resultType="VideoReviewLikeInfo">
+        SELECT
+        rl.likeSeq as likeSeq, rl.userSeq as userSeq, rl.reviewSeq as reviewSeq,
+        r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
+        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
+        r.videoSeq as videoSeq, v.title as videoTitle, v.channelName as channelName
+        FROM RLikes rl
+        JOIN reviews r
+        ON rl.reviewSeq = r.reviewSeq
+        JOIN users u
+        ON rl.userSeq = u.userSeq
+        JOIN videos v
+        ON r.videoSeq = v.videoSeq
+        WHERE rl.userSeq = #{userSeq}
     </select>
 
     <select id="selectLikeByReviewSeq" parameterType="int" resultType="User">
-        SELECT *
-        FROM Users u
-        JOIN RLikes vrl
-        ON u.userSeq = vrl.userSeq
-        WHERE vrl.reviewSeq = #{reviewSeq}
+        SELECT
+        rl.likeSeq as likeSeq, rl.userSeq as userSeq, rl.reviewSeq as reviewSeq,
+        r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
+        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
+        r.videoSeq as videoSeq, v.title as videoTitle, v.channelName as channelName
+        FROM RLikes rl
+        JOIN reviews r
+        ON rl.reviewSeq = r.reviewSeq
+        JOIN users u
+        ON rl.userSeq = u.userSeq
+        JOIN videos v
+        ON r.videoSeq = v.videoSeq
+        WHERE rl.reviewSeq = #{reviewSeq}
     </select>
 
     <delete id="cancelLike" parameterType="HashMap">

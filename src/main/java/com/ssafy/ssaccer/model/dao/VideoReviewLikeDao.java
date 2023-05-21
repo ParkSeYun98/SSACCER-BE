@@ -18,9 +18,9 @@ public interface VideoReviewLikeDao {
 
     VideoReviewLikeInfo selectReviewLike(HashMap<String, Integer> map);
 
-    List<VideoReview> selectLikeByUserSeq(int userSeq);
+    List<VideoReviewLikeInfo> selectLikeByUserSeq(int userSeq);
 
-    List<User> selectLikeByReviewSeq(int reviewSeq);
+    List<VideoReviewLikeInfo> selectLikeByReviewSeq(int reviewSeq);
 
     int cancelLike(HashMap<String, Integer> map);
 }

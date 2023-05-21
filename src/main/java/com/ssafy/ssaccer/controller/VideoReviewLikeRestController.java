@@ -92,10 +92,10 @@ public class VideoReviewLikeRestController {
     public ResponseEntity<?> getUserLikeListByReviewSeq(@PathVariable int reviewSeq) {
 
         try {
-            List<User> userList = lService.readLikeByReviewSeq(reviewSeq);
+            List<VideoReviewLikeInfo> list = lService.readLikeByReviewSeq(reviewSeq);
 
-            if(userList != null)
-                return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
+            if(list != null)
+                return new ResponseEntity<List<VideoReviewLikeInfo>>(list, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {
@@ -108,10 +108,10 @@ public class VideoReviewLikeRestController {
     public ResponseEntity<?> getReviewLikeListByUserSeq(@PathVariable int userSeq) {
 
         try {
-            List<VideoReview> reviewList = lService.readLikeByUserSeq(userSeq);
+            List<VideoReviewLikeInfo> list = lService.readLikeByUserSeq(userSeq);
 
-            if(reviewList != null)
-                return new ResponseEntity<List<VideoReview>>(reviewList, HttpStatus.OK);
+            if(list != null)
+                return new ResponseEntity<List<VideoReviewLikeInfo>>(list, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {

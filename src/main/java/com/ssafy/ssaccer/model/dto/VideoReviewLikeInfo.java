@@ -35,7 +35,7 @@ public class VideoReviewLikeInfo {
     private String orgimg;
 
     // reviews 테이블
-    private String title;
+    private String reviewTitle;
 
     private String content;
 
@@ -44,4 +44,11 @@ public class VideoReviewLikeInfo {
     private int viewCnt;
 
     private String createdDate;
+
+    // videos 테이블
+    private int videoSeq;
+
+    private String videoTitle;
+
+    private String channelName;
 }

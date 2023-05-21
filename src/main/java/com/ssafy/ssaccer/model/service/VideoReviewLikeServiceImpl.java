@@ -30,12 +30,12 @@ public class VideoReviewLikeServiceImpl implements VideoReviewLikeService {
     }
 
     @Override
-    public List<VideoReview> readLikeByUserSeq(int userSeq) {
+    public List<VideoReviewLikeInfo> readLikeByUserSeq(int userSeq) {
         return dao.selectLikeByUserSeq(userSeq);
     }
 
     @Override
-    public List<User> readLikeByReviewSeq(int reviewSeq) {
+    public List<VideoReviewLikeInfo> readLikeByReviewSeq(int reviewSeq) {
         return dao.selectLikeByReviewSeq(reviewSeq);
     }
 

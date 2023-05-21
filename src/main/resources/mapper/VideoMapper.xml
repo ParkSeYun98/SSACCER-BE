@@ -6,8 +6,8 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoDao">
 
     <insert id="insertVideo" parameterType="Video">
-        INSERT INTO Videos (youtubeId, title, url, channelName)
-        VALUES (#{youtubeId}, #{title}, #{url}, #{channelName})
+        INSERT INTO Videos (youtubeId, title, url, channelName, thumbnail)
+        VALUES (#{youtubeId}, #{title}, #{url}, #{channelName}, #{thumbnail})
     </insert>
 
     <select id="selectVideoByYoutubeId" parameterType="String" resultType="Video">

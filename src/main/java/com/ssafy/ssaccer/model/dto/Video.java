@@ -20,4 +20,6 @@ public class Video {
     private String url;
 
     private String channelName;
+
+    private String thumbnail;
 }

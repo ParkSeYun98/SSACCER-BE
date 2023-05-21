@@ -15,9 +15,9 @@ public interface VideoReviewLikeService {
 
     VideoReviewLikeInfo readReviewLike(HashMap<String, Integer> map);
 
-    List<VideoReview> readLikeByUserSeq(int userSeq);
+    List<VideoReviewLikeInfo> readLikeByUserSeq(int userSeq);
 
-    List<User> readLikeByReviewSeq(int reviewSeq);
+    List<VideoReviewLikeInfo> readLikeByReviewSeq(int reviewSeq);
 
     int deleteLike(HashMap<String, Integer> map);
 }
