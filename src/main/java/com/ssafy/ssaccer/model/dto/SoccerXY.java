@@ -9,9 +9,11 @@ import lombok.Setter;
 @ApiModel(value = "soccerxy DTO")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-public class soccerxy {
+public class SoccerXY {
 
     private String ps;
+
+    private String ss;
 
     private int x;
 

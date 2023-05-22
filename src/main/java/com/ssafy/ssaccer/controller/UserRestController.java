@@ -6,8 +6,10 @@ import com.ssafy.ssaccer.util.JwtUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,12 @@ import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -164,6 +171,22 @@ public class UserRestController {
 		}
 	}
 
+	@ApiOperation(value = "유저 목록 리스트")
+	@GetMapping("/read/list")
+	public ResponseEntity<?> getUserList() {
+
+		try {
+			List<User> userList = uService.readUserList();
+
+			if(userList != null)
+				return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
+			else
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		} catch(Exception e) {
+			return exceptionHandling(e);
+		}
+	}
+
 	@ApiOperation(value = "회원 이미지 업로드")
 	@PutMapping("/uploadimage/{userSeq}")
 	public ResponseEntity<?> uploadImage(HttpServletRequest request, @PathVariable int userSeq, @RequestParam("img") MultipartFile file) {
@@ -188,16 +211,14 @@ public class UserRestController {
 
 				if(user != null) {
 					user.setImg(replacedPath + System.currentTimeMillis() + "_" + file.getOriginalFilename());
+					System.out.println(user.getImg());
 					user.setOrgimg(file.getOriginalFilename());
 
 					file.transferTo(new File(user.getImg()));
 				}
 			}
-
 //			String path = "@/assets/upload";
-
 //			user.setImg()
-
 			int result = uService.updateUser(user);
 
 			if(result != 0) {
@@ -208,6 +229,24 @@ public class UserRestController {
 		} catch(Exception e) {
 			return exceptionHandling(e);
 		}
+	}
+
+	@GetMapping("/display")
+	public ResponseEntity<Resource> display(@RequestParam("filename") String filename) {
+		String path = "C:\\img";
+		String folder = "";
+		Resource resource = new FileSystemResource(path + folder + filename);
+		if(!resource.exists())
+			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+		HttpHeaders header = new HttpHeaders();
+		Path filePath = null;
+		try{
+			filePath = Paths.get(path + folder + filename);
+			header.add("Content-type", Files.probeContentType(filePath));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 	}
 
 	private ResponseEntity<String> exceptionHandling(Exception e) {
