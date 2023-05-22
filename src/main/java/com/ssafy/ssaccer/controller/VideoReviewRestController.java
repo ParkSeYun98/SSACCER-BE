@@ -92,7 +92,7 @@ public class VideoReviewRestController {
     public ResponseEntity<?> selectReviewListByUserSeq(@PathVariable int userSeq) {
 
         try {
-            List<VideoReview> reviewList = rService.readReviewListByVideoSeq(userSeq);
+            List<VideoReview> reviewList = rService.readReviewListByUserSeq(userSeq);
 
             if(reviewList != null)
                 return new ResponseEntity<List<VideoReview>>(reviewList, HttpStatus.OK);

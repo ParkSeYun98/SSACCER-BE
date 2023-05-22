@@ -40,6 +40,11 @@ public class VideoReviewServiceImpl implements VideoReviewService {
     }
 
     @Override
+    public List<VideoReview> readReviewListByUserSeq(int userSeq) {
+        return dao.selectReviewListByUserSeq(userSeq);
+    }
+
+    @Override
     public int updateReview(VideoReview review) {
         return dao.modifyReview(review);
     }

@@ -16,6 +16,8 @@ public interface VideoReviewService {
 
     List<VideoReview> readReviewListByVideoSeq(int videoSeq);
 
+    List<VideoReview> readReviewListByUserSeq(int userSeq);
+
     int updateReview(VideoReview review);
 
     int deleteReview(int reviewSeq);

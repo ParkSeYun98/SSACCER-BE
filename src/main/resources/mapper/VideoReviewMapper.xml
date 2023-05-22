@@ -27,6 +27,12 @@
         WHERE videoSeq = #{videoSeq}
     </select>
 
+    <select id="selectReviewListByUserSeq" parameterType="int" resultType="VideoReview">
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        FROM Reviews
+        WHERE userSeq = #{userSeq}
+    </select>
+
     <update id="modifyReview" parameterType="VideoReview">
         UPDATE Reviews
         SET title = #{title}, content = #{content}
