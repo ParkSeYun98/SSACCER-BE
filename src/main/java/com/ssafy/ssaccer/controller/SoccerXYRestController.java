@@ -15,13 +15,13 @@ import java.util.List;
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET , RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/soccerxy/list")
+@RequestMapping("/soccerxy")
 public class SoccerXYRestController {
 
     private final SoccerXYService sService;
 
     @ApiOperation(value = "soccerxy db 데이터 리스트 받기")
-    @GetMapping("/soccerxy")
+    @GetMapping("/list")
     public ResponseEntity<?> getSoccerXYList() {
 
         try {

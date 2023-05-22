@@ -38,27 +38,10 @@ public class UserRestController {
 
 	private final JwtUtil jwtUtil;
 
-    private final UserService uService;
+	private final UserService uService;
 
 	private final ResourceLoader resLoader;
-    
-//	@ApiOperation(value = "로그인", notes = "token 없이 로그인 / user 객체를 받음")
-//	@PostMapping("/login")
-//	public ResponseEntity<?> login(@RequestBody User user, HttpSession session) {
-//
-//		try {
-//			User loginUser = uService.login(user);
-//
-//			if(loginUser == null)
-//				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//
-//			session.setAttribute("loginUser", loginUser);
-//			return new ResponseEntity<User>(loginUser, HttpStatus.OK);
-//		} catch(Exception e) {
-//			return exceptionHandling(e);
-//		}
-//	}
-	
+
 	@ApiOperation(value = "로그인", notes = "jwt 활용 / user 객체를 받음")
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> login(User user) {
@@ -137,7 +120,7 @@ public class UserRestController {
 			return exceptionHandling(e);
 		}
 	}
-	
+
 	@ApiOperation(value = "회원 탈퇴")
 	@DeleteMapping("/quit/{userId}")
 	public ResponseEntity<?> quit(@PathVariable String userId) {
@@ -189,13 +172,13 @@ public class UserRestController {
 
 	@ApiOperation(value = "회원 이미지 업로드")
 	@PutMapping("/uploadimage/{userSeq}")
-	public ResponseEntity<?> uploadImage(HttpServletRequest request, @PathVariable int userSeq, @RequestParam("img") MultipartFile file) {
+	public ResponseEntity<?> uploadImage(@PathVariable int userSeq, @RequestParam("img") MultipartFile file) {
 
 		try {
 			User user = null;
 
 			if(file != null && file.getSize() > 0) {
-				Resource res = resLoader.getResource("");
+				Resource res = resLoader.getResource("classpath:static/resources/upload");
 
 				if(!res.getFile().exists())
 					res.getFile().mkdir();
@@ -207,18 +190,15 @@ public class UserRestController {
 						user = list.get(i);
 				}
 
-				String replacedPath = res.getFile().toString().replace("\\", "/");
-
 				if(user != null) {
-					user.setImg(replacedPath + System.currentTimeMillis() + "_" + file.getOriginalFilename());
-					System.out.println(user.getImg());
+//					user.setImg(file.getOriginalFilename());
+					user.setImg(System.currentTimeMillis() + "_" + file.getOriginalFilename());
 					user.setOrgimg(file.getOriginalFilename());
 
-					file.transferTo(new File(user.getImg()));
+					file.transferTo(new File(res.getFile().getCanonicalPath() + "/" + user.getImg()));
 				}
 			}
-//			String path = "@/assets/upload";
-//			user.setImg()
+
 			int result = uService.updateUser(user);
 
 			if(result != 0) {
@@ -232,20 +212,32 @@ public class UserRestController {
 	}
 
 	@GetMapping("/display")
-	public ResponseEntity<Resource> display(@RequestParam("filename") String filename) {
-		String path = "C:\\img";
-		String folder = "";
-		Resource resource = new FileSystemResource(path + folder + filename);
+	public ResponseEntity<Resource> display(@RequestParam("userSeq") String userSeq) throws IOException {
+		Resource res = resLoader.getResource("classpath:static/resources/upload");
+		User user = new User();
+		List<User> list = uService.readUserList();
+
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).getUserSeq() == Integer.parseInt(userSeq))
+				user = list.get(i);
+		}
+		String path = res.getFile().getCanonicalPath() + "/" + user.getImg();
+		Resource resource = new FileSystemResource(path);
+		System.out.println(user.getImg());
+
 		if(!resource.exists())
 			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+
 		HttpHeaders header = new HttpHeaders();
 		Path filePath = null;
+
 		try{
-			filePath = Paths.get(path + folder + filename);
+			filePath = Paths.get(path);
 			header.add("Content-type", Files.probeContentType(filePath));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+
 		return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 	}
 

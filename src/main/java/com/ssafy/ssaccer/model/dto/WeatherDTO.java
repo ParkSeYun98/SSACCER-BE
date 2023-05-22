@@ -6,22 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@ApiModel(value = "soccerxy DTO")
+@ApiModel(value = "User DTO")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter
-public class SoccerXY {
+public class WeatherDTO {
 
-    private String pf;
+    private String baseDate;
 
-    private String ps;
+    private String baseTime;
 
-    private String ss;
+    private String nx;
 
-    private int x;
-
-    private int y;
-
-    private String name;
-
-    private String year;
+    private String ny;
 }
