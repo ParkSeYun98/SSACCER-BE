@@ -44,9 +44,9 @@ public class RegionCodeRestController {
             List<RegionCode> regionCodeList = rcService.searchPartRegionCodeList(region);
 
             if(regionCodeList != null)
-                return new ResponseEntity<>(regionCodeList, HttpStatus.OK);
+                return new ResponseEntity<List<RegionCode>>(regionCodeList, HttpStatus.OK);
             else
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {
             return exceptionHandling(e);
         }
