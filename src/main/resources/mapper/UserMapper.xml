@@ -31,7 +31,7 @@
 
     <update id="modifyUser" parameterType="User">
         UPDATE Users
-        SET name = #{name}, nickname = #{nickname}, role = #{role}, position = #{position}, phoneNumber = #{phoneNumber}, img = #{img}
+        SET name = #{name}, password=#{password}, nickname = #{nickname}, role = #{role}, position = #{position}, phoneNumber = #{phoneNumber}, img = #{img}
         WHERE userSeq = #{userSeq}
     </update>
 
