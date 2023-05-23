@@ -31,5 +31,5 @@ public interface ArticleDao {
 
     int removeArticle(int articleSeq);
 
-    int addVieiwCnt(int articleSeq);
+    int addViewCnt(int articleSeq);
 }

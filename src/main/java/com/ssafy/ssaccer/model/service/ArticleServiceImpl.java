@@ -65,6 +65,6 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public int addViewCnt(int articleSeq) {
-        return dao.addVieiwCnt(articleSeq);
+        return dao.addViewCnt(articleSeq);
     }
 }

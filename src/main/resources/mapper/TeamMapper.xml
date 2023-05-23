@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.ssaccer.model.dao.TeamDao">
+
+    <insert id="insertMemberToTeam" parameterType="HashMap">
+        INSERT INTO Teams (userSeq, articleSeq)
+        VALUES (#{userSeq}, #{articleSeq})
+    </insert>
+
+    <select id="selectUserTeam" parameterType="HashMap" resultType="Team">
+        SELECT *
+        FROM Teams t
+        JOIN Users u
+        ON t.userSeq = u.userSeq
+        JOIN Articles a
+        ON t.articleSeq = a.articleSeq
+        WHERE t.userSeq = #{userSeq}, t.articleSeq = #{articleSeq}
+    </select>
+
+    <select id="selectTeamList" resultType="Team">
+        SELECT *
+        FROM Teams
+    </select>
+
+    <select id="selectMemberListInTeam" parameterType="int" resultType="Team">
+        SELECT *
+        FROM Teams t
+        JOIN Users u
+        ON t.userSeq = u.userSeq
+        JOIN Articles a
+        ON t.articleSeq = a.articleSeq
+        WHERE t.articleSeq = #{articleSeq}
+    </select>
+
+    <select id="selectTeamsListFromUser" parameterType="int" resultType="Team">
+        SELECT *
+        FROM Teams t
+        JOIN Users u
+        ON t.userSeq = u.userSeq
+        JOIN Articles a
+        ON t.articleSeq = a.articleSeq
+        WHERE t.userSeq = #{userSeq}
+    </select>
+
+    <delete id="removeMemberFromTeam" parameterType="HashMap">
+        DELETE FROM Teams
+        WHERE userSeq = #{userSeq}, articleSeq = #{articleSeq}
+    </delete>
+
+</mapper>
