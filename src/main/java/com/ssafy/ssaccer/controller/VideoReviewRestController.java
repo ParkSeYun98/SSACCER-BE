@@ -135,6 +135,23 @@ public class VideoReviewRestController {
         }
     }
 
+    @ApiOperation(value = "조회수 증가")
+    @PutMapping("/update/viewcnt/{reviewSeq}")
+    public ResponseEntity<?> updateViewCnt(@PathVariable int reviewSeq) {
+
+        try {
+            int result = rService.addViewCnt(reviewSeq);
+
+            if(result != 0)
+                return new ResponseEntity<Integer>(result, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
 
         e.printStackTrace();

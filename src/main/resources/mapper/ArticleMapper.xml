@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.ssaccer.model.dao.ArticleDao">
+
+    <insert id="insertArticle" parameterType="Article">
+        INSERT INTO articles (userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate)
+        VALUES (#{userSeq}, #{title}, #{content}, #{recruiteMax}, #{place}, #{cost}, #{ability}, #{status}, #{gender}, #{shower}, #{parking}, #{beverage}, #{rental}, now(), #{matchstartDate}, #{matchendDate})
+    </insert>
+
+    <select id="selectArticleByArticleSeq" parameterType="int" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        WHERE articleSeq = #{articleSeq}
+    </select>
+
+    <select id="selectAllArticleList" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        ORDER BY
+    </select>
+
+
+    <select id="selectArticleListByUserSeq" parameterType="int" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        WHERE userSeq = #{userSeq}
+    </select>
+
+    <select id="selectArticleListByStatus" parameterType="Status" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        WHERE status = #{status}
+    </select>
+
+    <select id="selectArticleListByGender" parameterType="Gender" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        WHERE gender = #{gender}
+    </select>
+
+    <select id="selectArticleListByAbility" parameterType="Ability" resultType="Article">
+        SELECT articleSeq, userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        FROM articles
+        WHERE ability = #{ability}
+    </select>
+
+    <update id="modifyArticle" parameterType="Article">
+        UPDATE articles
+        SET title = #{title}, content = #{content}, recruiteMax = #{recruiteMax}, place = #{place}, cost = #{cost}, ability = #{ability}, status = #{status}, gender = #{gender}, shower = #{shower}, parking = #{parking}, beverage = #{beverage}, rental = #{rental}, matchstartDate = #{matchstartDate}, matchendDate = #{matchendDate}
+        WHERE articleSeq = #{articleSeq}
+    </update>
+
+    <delete id="removeArticle" parameterType="int">
+        DELETE FROM articles
+        WHERE articleSeq = #{articleSeq}
+    </delete>
+
+    <update id="addViewCnt" parameterType="int">
+        UPDATE articles
+        SET viewCnt = viewCnt + 1
+        WHERE articleSeq = #{articleSeq}
+    </update>
+</mapper>
