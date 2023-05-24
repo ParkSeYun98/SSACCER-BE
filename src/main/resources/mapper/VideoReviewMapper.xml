@@ -11,24 +11,24 @@
     </insert>
 
     <select id="selectReview" parameterType="int" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
         FROM Reviews
         WHERE reviewSeq = #{reviewSeq}
     </select>
  
     <select id="selectReviewList" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
         FROM Reviews
     </select>
 
     <select id="selectReviewListByVideoSeq" parameterType="int" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
         FROM Reviews
         WHERE videoSeq = #{videoSeq}
     </select>
 
     <select id="selectReviewListByUserSeq" parameterType="int" resultType="VideoReview">
-        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") AS createdDate
+        SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
         FROM Reviews
         WHERE userSeq = #{userSeq}
     </select>
