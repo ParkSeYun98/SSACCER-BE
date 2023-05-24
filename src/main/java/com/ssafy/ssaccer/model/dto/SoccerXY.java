@@ -24,4 +24,8 @@ public class SoccerXY {
     private String name;
 
     private String year;
+
+    private double longitude;
+
+    private double latitude;
 }
