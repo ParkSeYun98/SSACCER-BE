@@ -18,8 +18,12 @@
     </select>
 
     <select id="selectAllArticleList" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
-        FROM articles
+        SELECT a.articleSeq as articleSeq, a.userSeq as userSeq, a.title as title, a.content as content, a.viewCnt as viewCnt, a.recruiteCnt as recruiteCnt, a.recruiteMax as recruiteMax, a.place as place, a.cost as cost, a.ability as ability, a.status as status, a.gender as gender,
+               a.shower as shower, a.parking as parking, a.beverage as beverage, a.rental as rental, DATE_FORMAT(a.createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(a.matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(a.matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate,
+               u.name as name, u.nickname as nickname
+        FROM articles a
+        JOIN users u
+        ON  a.userSeq = u.userSeq
         ORDER BY matchstartDate
     </select>
 
