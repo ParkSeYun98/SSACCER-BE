@@ -1,6 +1,7 @@
 package com.ssafy.ssaccer.controller;
 
 import com.ssafy.ssaccer.model.dto.Team;
+import com.ssafy.ssaccer.model.dto.TeamDTO;
 import com.ssafy.ssaccer.model.service.TeamService;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
@@ -52,10 +53,10 @@ public class TeamRestController {
             map.put("userSeq", userSeq);
             map.put("articleSeq", articleSeq);
 
-            Team team = tService.readUserTeam(map);
+            TeamDTO team = tService.readUserTeam(map);
 
             if(team != null)
-                return new ResponseEntity<Team>(team, HttpStatus.OK);
+                return new ResponseEntity<TeamDTO>(team, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {
@@ -68,10 +69,10 @@ public class TeamRestController {
     public ResponseEntity<?> getTeamList() {
 
         try {
-            List<Team> teamList = tService.readTeamList();
+            List<TeamDTO> teamList = tService.readTeamList();
 
             if(teamList != null)
-                return new ResponseEntity<List<Team>>(teamList, HttpStatus.OK);
+                return new ResponseEntity<List<TeamDTO>>(teamList, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {
@@ -84,10 +85,10 @@ public class TeamRestController {
     public ResponseEntity<?> getMemberListInTeam(@PathVariable int articleSeq) {
 
         try {
-            List<Team> teamList = tService.readMemberListInTeam(articleSeq);
+            List<TeamDTO> teamList = tService.readMemberListInTeam(articleSeq);
 
             if(teamList != null)
-                return new ResponseEntity<List<Team>>(teamList, HttpStatus.OK);
+                return new ResponseEntity<List<TeamDTO>>(teamList, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 
@@ -101,10 +102,10 @@ public class TeamRestController {
     public ResponseEntity<?> getTeamListFromUser(@PathVariable int userSeq) {
 
         try {
-            List<Team> teamList = tService.readTeamListFromUser(userSeq);
+            List<TeamDTO> teamList = tService.readTeamListFromUser(userSeq);
 
             if(teamList != null)
-                return new ResponseEntity<List<Team>>(teamList, HttpStatus.OK);
+                return new ResponseEntity<List<TeamDTO>>(teamList, HttpStatus.OK);
             else
                 return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         } catch(Exception e) {

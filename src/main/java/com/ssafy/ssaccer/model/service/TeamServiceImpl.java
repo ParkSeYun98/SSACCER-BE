@@ -2,6 +2,7 @@ package com.ssafy.ssaccer.model.service;
 
 import com.ssafy.ssaccer.model.dao.TeamDao;
 import com.ssafy.ssaccer.model.dto.Team;
+import com.ssafy.ssaccer.model.dto.TeamDTO;
 import io.swagger.annotations.ApiModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,22 +24,22 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public Team readUserTeam(HashMap<String, Integer> map) {
+    public TeamDTO readUserTeam(HashMap<String, Integer> map) {
         return dao.selectUserTeam(map);
     }
 
     @Override
-    public List<Team> readTeamList() {
+    public List<TeamDTO> readTeamList() {
         return dao.selectTeamList();
     }
 
     @Override
-    public List<Team> readMemberListInTeam(int articleSeq) {
+    public List<TeamDTO> readMemberListInTeam(int articleSeq) {
         return dao.selectMemberListInTeam(articleSeq);
     }
 
     @Override
-    public List<Team> readTeamListFromUser(int userSeq) {
+    public List<TeamDTO> readTeamListFromUser(int userSeq) {
         return dao.selectTeamsListFromUser(userSeq);
     }
 

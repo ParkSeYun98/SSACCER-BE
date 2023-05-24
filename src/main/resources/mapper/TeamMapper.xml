@@ -10,8 +10,10 @@
         VALUES (#{userSeq}, #{articleSeq})
     </insert>
 
-    <select id="selectUserTeam" parameterType="HashMap" resultType="Team">
-        SELECT *
+    <select id="selectUserTeam" parameterType="HashMap" resultType="TeamDTO">
+        SELECT t.teamSeq as teamSeq, t.userSeq as userSeq, t.articleSeq as articleSeq,
+        u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
+        a.ability as ability, a.status as status, a.gender as gender
         FROM Teams t
         JOIN Users u
         ON t.userSeq = u.userSeq
@@ -20,13 +22,14 @@
         WHERE t.userSeq = #{userSeq}, t.articleSeq = #{articleSeq}
     </select>
 
-    <select id="selectTeamList" resultType="Team">
+    <select id="selectTeamList" resultType="TeamDTO">
         SELECT *
         FROM Teams
     </select>
 
-    <select id="selectMemberListInTeam" parameterType="int" resultType="Team">
-        SELECT *
+    <select id="selectMemberListInTeam" parameterType="int" resultType="TeamDTO">
+        SELECT t.*, u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
+        a.ability as ability, a.status as status, a.gender as gender
         FROM Teams t
         JOIN Users u
         ON t.userSeq = u.userSeq
@@ -35,8 +38,9 @@
         WHERE t.articleSeq = #{articleSeq}
     </select>
 
-    <select id="selectTeamsListFromUser" parameterType="int" resultType="Team">
-        SELECT *
+    <select id="selectTeamsListFromUser" parameterType="int" resultType="TeamDTO">
+        SELECT t.*, u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
+        a.ability as ability, a.status as status, a.gender as gender
         FROM Teams t
         JOIN Users u
         ON t.userSeq = u.userSeq
