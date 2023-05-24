@@ -182,6 +182,38 @@ public class ArticleRestController {
         }
     }
 
+    @ApiOperation(value = "현재 팀원 수 증가")
+    @PutMapping("/addrecruitecnt/{articleSeq}")
+    public ResponseEntity<?> addRecruiteCnt(@PathVariable int articleSeq) {
+
+        try {
+            int result = aService.addRecruiteCnt(articleSeq);
+
+            if(result != 0)
+                return new ResponseEntity<Integer>(result, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
+    @ApiOperation(value = "현재 팀원 수 감소")
+    @PutMapping("/minusrecruitecnt/{articleSeq}")
+    public ResponseEntity<?> minusRecruiteCnt(@PathVariable int articleSeq) {
+
+        try {
+            int result = aService.minusRecruiteCnt(articleSeq);
+
+            if(result != 0)
+                return new ResponseEntity<Integer>(result, HttpStatus.OK);
+            else
+                return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+        } catch(Exception e) {
+            return exceptionHandling(e);
+        }
+    }
+
     private ResponseEntity<String> exceptionHandling(Exception e) {
 
         e.printStackTrace();

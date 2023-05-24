@@ -47,7 +47,7 @@
 
     <delete id="removeMemberFromTeam" parameterType="HashMap">
         DELETE FROM Teams
-        WHERE userSeq = #{userSeq}, articleSeq = #{articleSeq}
+        WHERE userSeq = #{userSeq} AND articleSeq = #{articleSeq}
     </delete>
 
 </mapper>

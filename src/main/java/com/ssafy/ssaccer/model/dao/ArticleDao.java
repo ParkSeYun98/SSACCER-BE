@@ -32,4 +32,8 @@ public interface ArticleDao {
     int removeArticle(int articleSeq);
 
     int addViewCnt(int articleSeq);
+
+    int addRecruiteCnt(int articleSeq);
+
+    int minusRecruiteCnt(int articleSeq);
 }

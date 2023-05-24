@@ -67,4 +67,14 @@ public class ArticleServiceImpl implements ArticleService{
     public int addViewCnt(int articleSeq) {
         return dao.addViewCnt(articleSeq);
     }
+
+    @Override
+    public int addRecruiteCnt(int articleSeq) {
+        return dao.addRecruiteCnt(articleSeq);
+    }
+
+    @Override
+    public int minusRecruiteCnt(int articleSeq) {
+        return dao.minusRecruiteCnt(articleSeq);
+    }
 }

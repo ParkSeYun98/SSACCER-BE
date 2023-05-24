@@ -30,4 +30,8 @@ public interface ArticleService {
     int deleteArticle(int articleSeq);
 
     int addViewCnt(int articleSeq);
+
+    int addRecruiteCnt(int articleSeq);
+
+    int minusRecruiteCnt(int articleSeq);
 }

@@ -21,6 +21,8 @@ public class Article {
 
     private int viewCnt;
 
+    private int recruiteCnt;
+
     private int recruiteMax;
 
     private String place;

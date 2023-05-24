@@ -6,45 +6,50 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.ArticleDao">
 
     <insert id="insertArticle" parameterType="Article">
-        INSERT INTO articles (userSeq, title, content, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, createdDate, matchstartDate, matchendDate)
-        VALUES (#{userSeq}, #{title}, #{content}, #{recruiteMax}, #{place}, #{cost}, #{ability}, #{status}, #{gender}, #{shower}, #{parking}, #{beverage}, #{rental}, #{createdDate}, #{matchstartDate}, #{matchendDate})
+        INSERT INTO articles (userSeq, title, content, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, createdDate, matchstartDate, matchendDate)
+        VALUES (#{userSeq}, #{title}, #{content}, #{recruiteCnt} ,#{recruiteMax}, #{place}, #{cost}, #{ability}, #{status}, #{gender}, #{shower}, #{parking}, #{beverage}, #{rental}, #{createdDate}, #{matchstartDate}, #{matchendDate})
     </insert>
 
     <select id="selectArticleByArticleSeq" parameterType="int" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         WHERE articleSeq = #{articleSeq}
+        ORDER BY matchstartDate
     </select>
 
     <select id="selectAllArticleList" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         ORDER BY matchstartDate
     </select>
 
 
     <select id="selectArticleListByUserSeq" parameterType="int" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         WHERE userSeq = #{userSeq}
+        ORDER BY matchstartDate
     </select>
 
     <select id="selectArticleListByStatus" parameterType="Status" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         WHERE status = #{status}
+        ORDER BY matchstartDate
     </select>
 
     <select id="selectArticleListByGender" parameterType="Gender" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         WHERE gender = #{gender}
+        ORDER BY matchstartDate
     </select>
 
     <select id="selectArticleListByAbility" parameterType="Ability" resultType="Article">
-        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%M:%D %H:%I:%S") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%M:%D %H:%I:%S") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%M:%D %H:%I:%S") as matchendDate
+        SELECT articleSeq, userSeq, title, content, viewCnt, recruiteCnt, recruiteMax, place, cost, ability, status, gender, shower, parking, beverage, rental, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") as createdDate, DATE_FORMAT(matchstartDate, "%Y:%m:%d %H:%i:%s") as matchstartDate, DATE_FORMAT(matchendDate, "%Y:%m:%d %H:%i:%s") as matchendDate
         FROM articles
         WHERE ability = #{ability}
+        ORDER BY matchstartDate
     </select>
 
     <update id="modifyArticle" parameterType="Article">
@@ -61,6 +66,18 @@
     <update id="addViewCnt" parameterType="int">
         UPDATE articles
         SET viewCnt = viewCnt + 1
+        WHERE articleSeq = #{articleSeq}
+    </update>
+
+    <update id="addRecruiteCnt" parameterType="int">
+        UPDATE articles
+        SET recruiteCnt = recruiteCnt + 1
+        WHERE articleSeq = #{articleSeq}
+    </update>
+
+    <update id="minusRecruiteCnt" parameterType="int">
+        UPDATE articles
+        SET recruiteCnt = recruiteCnt - 1
         WHERE articleSeq = #{articleSeq}
     </update>
 </mapper>
