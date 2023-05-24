@@ -48,4 +48,6 @@ public class Article {
     private String matchstartDate;
 
     private String matchendDate;
+
+    //
 }

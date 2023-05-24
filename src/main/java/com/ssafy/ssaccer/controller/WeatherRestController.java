@@ -241,9 +241,7 @@ public class WeatherRestController {
                 e.printStackTrace();
 
             }
-//        }
 
-        System.out.println(jsonView.getModel().equals("{}"));
 
         return new ResponseEntity<ModelAndView>(jsonView, HttpStatus.OK);
     }
