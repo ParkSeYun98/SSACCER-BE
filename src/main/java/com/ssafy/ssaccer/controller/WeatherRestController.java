@@ -31,8 +31,9 @@ import java.util.List;
 @RequestMapping("/weather")
 public class WeatherRestController {
 
-    @Value("{Weather-key}")
+    @Value("${Weather-key}")
     private String Weather_Key;
+    String key = "TOAWL0f1DYTXyZiJRU4xXoEtL8ttE7ZXXU5rPNuCyxOI4Wd2XwYCgqdg7MPICUt6EHDFdV3%2BNczM8CpeZzehtQ%3D%3D";
 
     /* 기상청 단기예보(동네예보) API */
     /* 기상개황, 육상, 해상 */
@@ -49,7 +50,7 @@ public class WeatherRestController {
         //동네예보 -- 전날 05시 부터 225개의 데이터를 조회하면 모레까지의 날씨를 알 수 있음
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst");
 
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + Weather_Key); /*Service Key*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + key); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON) Default: XML*/
@@ -118,7 +119,7 @@ public class WeatherRestController {
         //동네예보 -- 전날 05시 부터 225개의 데이터를 조회하면 모레까지의 날씨를 알 수 있음
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa"); /*URL*/
 
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + Weather_Key); /*Service Key*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + key); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
@@ -181,11 +182,13 @@ public class WeatherRestController {
         ModelAndView jsonView = new ModelAndView("jsonView");
         String data = null;
 
+
+
 //        while(true) {
 
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1360000/MidFcstInfoService/getMidLandFcst"); /*URL*/
 
-            urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + Weather_Key); /*Service Key*/
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + key); /*Service Key*/
             urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
             urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); /*한 페이지 결과 수*/
             urlBuilder.append("&" + URLEncoder.encode("dataType","UTF-8") + "=" + URLEncoder.encode("JSON", "UTF-8")); /*요청자료형식(XML/JSON)Default: XML*/
