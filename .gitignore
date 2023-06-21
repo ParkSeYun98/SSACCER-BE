@@ -34,3 +34,4 @@ build/
 
 application.properties
 application-API-KEY.properties
+application-DB.properties
