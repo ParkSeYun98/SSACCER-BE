@@ -33,3 +33,4 @@ build/
 .vscode/
 
 application-API_KEY.properties
+application-DB.properties
