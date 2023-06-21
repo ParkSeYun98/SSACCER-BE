@@ -7,46 +7,46 @@
 
     <insert id="insertUser" parameterType="User">
 
-        INSERT INTO Users (userId, password, name, nickname, position, phoneNumber, img)
+        INSERT INTO users (userId, password, name, nickname, position, phoneNumber, img)
         VALUES (#{userId}, #{password}, #{name}, #{nickname}, #{position}, #{phoneNumber}, #{img})
 
     </insert>
 
     <select id="selectUserByUserId" parameterType="String" resultType="User">
         SELECT *
-        FROM Users
+        FROM users
         WHERE userId = #{userId}
     </select>
 
     <select id="selectUserByUserSeq" parameterType="int" resultType="User">
         SELECT *
-        FROM Users
+        FROM users
         WHERE userSeq = #{userSeq}
     </select>
 
     <select id="selectUserList" resultType="User">
         SELECT *
-        FROM Users
+        FROM users
     </select>
 
     <update id="modifyUser" parameterType="User">
-        UPDATE Users
+        UPDATE users
         SET name = #{name}, password=#{password}, nickname = #{nickname}, role = #{role}, position = #{position}, phoneNumber = #{phoneNumber}, img = #{img}
         WHERE userSeq = #{userSeq}
     </update>
 
     <delete id="removeUserByUserId" parameterType="String">
-        DELETE FROM Users
+        DELETE FROM users
         WHERE userId = #{userId}
     </delete>
 
     <delete id="removeUserByUserSeq" parameterType="Integer">
-        DELETE FROM Users
+        DELETE FROM users
         WHERE userSeq = #{userSeq}
     </delete>
 
     <update id="uploadImage" parameterType="String">
-        UPDATE Users
+        UPDATE users
         SET img = #{img}
         WHERE userSeq = #{userSeq}
     </update>

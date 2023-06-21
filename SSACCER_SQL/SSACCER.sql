@@ -13,10 +13,10 @@ CREATE SCHEMA IF NOT EXISTS `ssaccer` CHARACTER SET = utf8mb4 COLLATE = utf8mb4_
 USE `ssaccer` ;
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`Users`
+-- Table `ssaccer`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Users`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`Users` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`users` (
   `userSeq` INT NOT NULL AUTO_INCREMENT,
   `userId` VARCHAR(20) NOT NULL,
   `password` VARCHAR(30) NOT NULL,
@@ -40,8 +40,8 @@ COLLATE utf8mb4_general_ci;
 -- -----------------------------------------------------
 -- Table `ssaccer`.`articles`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Articles`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`Articles` (
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`articles` (
   `articleSeq` INT NOT NULL AUTO_INCREMENT,
   `userSeq` INT NOT NULL,
   `title` VARCHAR(100) NOT NULL,
@@ -63,10 +63,10 @@ CREATE TABLE IF NOT EXISTS `ssaccer`.`Articles` (
   `matchenddate` TIMESTAMP NOT NULL,
   PRIMARY KEY (`articleSeq`),
   UNIQUE INDEX `articleSeq_UNIQUE` (`articleSeq` ASC) VISIBLE,
-  INDEX `fk_Articles_userSeq_idx` (`userSeq` ASC) VISIBLE,
-  CONSTRAINT `fk_Articles_userSeq`
+  INDEX `fk_articles_userSeq_idx` (`userSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_articles_userSeq`
     FOREIGN KEY (`userSeq`)
-    REFERENCES `ssaccer`.`Users` (`userSeq`)
+    REFERENCES `ssaccer`.`users` (`userSeq`)
     ON UPDATE CASCADE
     ON DELETE CASCADE)
 ENGINE = InnoDB
@@ -75,10 +75,10 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`SoccerFields`
+-- Table `ssaccer`.`soccerfields`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SoccerFields`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`SoccerFields` (
+DROP TABLE IF EXISTS `soccerfields`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`soccerfields` (
   `fieldSeq` INT NOT NULL AUTO_INCREMENT,
   `first` VARCHAR(45) NULL DEFAULT NULL,
   `second` VARCHAR(45) NULL DEFAULT NULL,
@@ -92,10 +92,10 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`XYPoints`
+-- Table `ssaccer`.`xypoints`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `XYPoints`; 
-CREATE TABLE IF NOT EXISTS `ssaccer`.`XYPoints` (
+DROP TABLE IF EXISTS `xypoints`; 
+CREATE TABLE IF NOT EXISTS `ssaccer`.`xypoints` (
   `pointSeq` INT NOT NULL AUTO_INCREMENT,
   `first` VARCHAR(45)  NULL,
   `second` VARCHAR(45) NULL DEFAULT NULL,
@@ -111,23 +111,23 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`Teams`
+-- Table `ssaccer`.`teams`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Teams`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`Teams` (
+DROP TABLE IF EXISTS `teams`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`teams` (
   `teamSeq` INT NOT NULL AUTO_INCREMENT,
   `userSeq` INT NOT NULL,
   `articleSeq` INT NOT NULL,
   PRIMARY KEY (`teamSeq`),
   UNIQUE INDEX `teamSeq_UNIQUE` (`teamSeq` ASC) VISIBLE,
-  INDEX `fk_Teams_userSeq_idx` (`userSeq` ASC) VISIBLE,
-  INDEX `fk_Teams_articleSeq_idx` (`articleSeq` ASC) VISIBLE,
-  CONSTRAINT `fk_Teams_articleSeq`
+  INDEX `fk_teams_userSeq_idx` (`userSeq` ASC) VISIBLE,
+  INDEX `fk_teams_articleSeq_idx` (`articleSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_teams_articleSeq`
     FOREIGN KEY (`articleSeq`)
     REFERENCES `ssaccer`.`articles` (`articleSeq`),
-  CONSTRAINT `fk_Teams_userSeq`
+  CONSTRAINT `fk_teams_userSeq`
     FOREIGN KEY (`userSeq`)
-    REFERENCES `ssaccer`.`Users` (`userSeq`)
+    REFERENCES `ssaccer`.`users` (`userSeq`)
 	ON UPDATE CASCADE
     ON DELETE CASCADE)
 ENGINE = InnoDB
@@ -136,10 +136,10 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`Videos`
+-- Table `ssaccer`.`videos`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Videos`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`Videos` (
+DROP TABLE IF EXISTS `videos`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`videos` (
   `videoSeq` INT NOT NULL AUTO_INCREMENT,
   `youtubeId` VARCHAR(100) NOT NULL,
   `title` VARCHAR(200) NOT NULL,
@@ -157,10 +157,10 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`Reviews`
+-- Table `ssaccer`.`reviews`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Reviews`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`Reviews` (
+DROP TABLE IF EXISTS `reviews`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`reviews` (
   `reviewSeq` INT NOT NULL AUTO_INCREMENT,
   `userSeq` INT NOT NULL,
   `videoSeq` INT NOT NULL,
@@ -173,14 +173,14 @@ CREATE TABLE IF NOT EXISTS `ssaccer`.`Reviews` (
   UNIQUE INDEX `reviewSeq_UNIQUE` (`reviewSeq` ASC) VISIBLE,
   INDEX `fk_videoreviews_userSeq_idx` (`userSeq` ASC) VISIBLE,
   INDEX `fk_videoreviews_videoSeq_idx` (`videoSeq` ASC) VISIBLE,
-  CONSTRAINT `fk_Reviews_userSeq`
+  CONSTRAINT `fk_reviews_userSeq`
     FOREIGN KEY (`userSeq`)
-    REFERENCES `ssaccer`.`Users` (`userSeq`)
+    REFERENCES `ssaccer`.`users` (`userSeq`)
 	ON UPDATE CASCADE
     ON DELETE CASCADE,
-  CONSTRAINT `fk_Reviews_videoSeq`
+  CONSTRAINT `fk_reviews_videoSeq`
     FOREIGN KEY (`videoSeq`)
-    REFERENCES `ssaccer`.`Videos` (`videoSeq`))
+    REFERENCES `ssaccer`.`videos` (`videoSeq`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
@@ -188,24 +188,24 @@ COLLATE utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `ssaccer`.`RLikes`
+-- Table `ssaccer`.`rlikes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `RLikes`;
-CREATE TABLE IF NOT EXISTS `ssaccer`.`RLikes` (
+DROP TABLE IF EXISTS `rlikes`;
+CREATE TABLE IF NOT EXISTS `ssaccer`.`rlikes` (
   `likeSeq` INT NOT NULL AUTO_INCREMENT,
   `userSeq` INT NOT NULL,
   `reviewSeq` INT NOT NULL,
   UNIQUE INDEX `reviewlikeSeq_UNIQUE` (`likeSeq` ASC) VISIBLE,
   INDEX `fk_reviewlikes_userSeq_idx` (`userSeq` ASC) VISIBLE,
   INDEX `fk_reviewlikes_videoreviewSeq_idx` (`reviewSeq` ASC) VISIBLE,
-  CONSTRAINT `fk_RLikes_userSeq`
+  CONSTRAINT `fk_rlikes_userSeq`
     FOREIGN KEY (`userSeq`)
-    REFERENCES `ssaccer`.`Users` (`userSeq`)
+    REFERENCES `ssaccer`.`users` (`userSeq`)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-  CONSTRAINT `fk_RLikes_reviewSeq`
+  CONSTRAINT `fk_rlikes_reviewSeq`
     FOREIGN KEY (`reviewSeq`)
-    REFERENCES `ssaccer`.`Reviews` (`reviewSeq`))
+    REFERENCES `ssaccer`.`reviews` (`reviewSeq`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE utf8mb4_general_ci;
