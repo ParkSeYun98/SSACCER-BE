@@ -6,40 +6,40 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoDao">
 
     <insert id="insertVideo" parameterType="Video">
-        INSERT INTO Videos (youtubeId, title, url, channelName, thumbnail)
+        INSERT INTO videos (youtubeId, title, url, channelName, thumbnail)
         VALUES (#{youtubeId}, #{title}, #{url}, #{channelName}, #{thumbnail})
     </insert>
 
     <select id="selectVideoByYoutubeId" parameterType="String" resultType="Video">
         SELECT *
-        FROM Videos
+        FROM videos
         WHERE youtubeId = #{youtubeId}
     </select>
 
     <select id="selectVideoByVideoSeq" parameterType="int" resultType="Video">
         SELECT *
-        FROM Videos
+        FROM videos
         WHERE videoSeq = #{videoSeq}
     </select>
 
     <select id="selectVideoList" resultType="Video">
         SELECT *
-        FROM Videos
+        FROM videos
     </select>
 
     <update id="modifyVideo" parameterType="Video">
-        UPDATE Videos
+        UPDATE videos
         SET channelName = #{channelName}
         WHERE videoSeq = #{videoSeq}
     </update>
 
     <delete id="removeVideoByYoutubeId" parameterType="String">
-        DELETE FROM Videos
+        DELETE FROM videos
         WHERE youtubeId = #{youtubeId}
     </delete>
 
     <delete id="removeVideoByVideoSeq" parameterType="int">
-        DELETE FROM Videos
+        DELETE FROM videos
         WHERE videoSeq = #{videoSeq}
     </delete>
 

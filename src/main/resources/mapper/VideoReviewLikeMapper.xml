@@ -6,7 +6,7 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoReviewLikeDao">
 
     <insert id="addLike" parameterType="HashMap">
-        INSERT INTO RLikes (userSeq, reviewSeq)
+        INSERT INTO rlikes (userSeq, reviewSeq)
         VALUES (#{userSeq}, #{reviewSeq})
     </insert>
 
@@ -16,7 +16,7 @@
         r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
         u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
         r.videoSeq as videoSeq, v.youtubeId as youtubeId, v.title as videoTitle, v.channelName as channelName
-        FROM RLikes rl
+        FROM rlikes rl
         JOIN reviews r
         ON rl.reviewSeq = r.reviewSeq
         JOIN users u
@@ -32,7 +32,7 @@
         r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
         u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
         r.videoSeq as videoSeq, v.youtubeId as youtubeId, v.title as videoTitle, v.channelName as channelName
-        FROM RLikes rl
+        FROM rlikes rl
         JOIN reviews r
         ON rl.reviewSeq = r.reviewSeq
         JOIN users u
@@ -48,7 +48,7 @@
         r.title as reviewTitle, r.content as content, r.writer as writer, r.viewCnt as viewCnt, DATE_FORMAT(r.createdDate, "%Y:%M:%D %H:%I:%S") as createdDate,
         u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img, u.orgimg as orgimg,
         r.videoSeq as videoSeq, v.youtubeId as youtubeId, v.title as videoTitle, v.channelName as channelName
-        FROM RLikes rl
+        FROM rlikes rl
         JOIN reviews r
         ON rl.reviewSeq = r.reviewSeq
         JOIN users u
@@ -59,7 +59,7 @@
     </select>
 
     <delete id="cancelLike" parameterType="HashMap">
-        DELETE FROM RLikes
+        DELETE FROM rlikes
         WHERE userSeq = #{userSeq} AND reviewSeq = #{reviewSeq}
     </delete>
 

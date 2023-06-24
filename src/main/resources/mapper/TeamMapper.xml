@@ -6,7 +6,7 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.TeamDao">
 
     <insert id="insertMemberToTeam" parameterType="HashMap">
-        INSERT INTO Teams (userSeq, articleSeq)
+        INSERT INTO teams (userSeq, articleSeq)
         VALUES (#{userSeq}, #{articleSeq})
     </insert>
 
@@ -14,10 +14,10 @@
         SELECT t.teamSeq as teamSeq, t.userSeq as userSeq, t.articleSeq as articleSeq,
         u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
         a.ability as ability, a.status as status, a.gender as gender
-        FROM Teams t
-        JOIN Users u
+        FROM teams t
+        JOIN users u
         ON t.userSeq = u.userSeq
-        JOIN Articles a
+        JOIN articles a
         ON t.articleSeq = a.articleSeq
         WHERE t.userSeq = #{userSeq}, t.articleSeq = #{articleSeq}
     </select>
@@ -30,10 +30,10 @@
     <select id="selectMemberListInTeam" parameterType="int" resultType="TeamDTO">
         SELECT t.*, u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
         a.ability as ability, a.status as status, a.gender as gender
-        FROM Teams t
-        JOIN Users u
+        FROM teams t
+        JOIN users u
         ON t.userSeq = u.userSeq
-        JOIN Articles a
+        JOIN articles a
         ON t.articleSeq = a.articleSeq
         WHERE t.articleSeq = #{articleSeq}
     </select>
@@ -41,16 +41,16 @@
     <select id="selectTeamsListFromUser" parameterType="int" resultType="TeamDTO">
         SELECT t.*, u.name as name, u.nickname as nickname, u.role as role, u.position as position, u.phoneNumber as phoneNumber, u.img as img,
         a.ability as ability, a.status as status, a.gender as gender
-        FROM Teams t
-        JOIN Users u
+        FROM teams t
+        JOIN users u
         ON t.userSeq = u.userSeq
-        JOIN Articles a
+        JOIN articles a
         ON t.articleSeq = a.articleSeq
         WHERE t.userSeq = #{userSeq}
     </select>
 
     <delete id="removeMemberFromTeam" parameterType="HashMap">
-        DELETE FROM Teams
+        DELETE FROM teams
         WHERE userSeq = #{userSeq} AND articleSeq = #{articleSeq}
     </delete>
 

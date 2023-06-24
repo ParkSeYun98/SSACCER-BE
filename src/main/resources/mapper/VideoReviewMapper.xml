@@ -6,46 +6,46 @@
 <mapper namespace="com.ssafy.ssaccer.model.dao.VideoReviewDao">
 
     <insert id="insertReview" parameterType="VideoReview">
-        INSERT INTO Reviews (userSeq, videoSeq, title, content, writer, createdDate)
+        INSERT INTO reviews (userSeq, videoSeq, title, content, writer, createdDate)
         VALUES (#{userSeq}, #{videoSeq}, #{title}, #{content}, #{writer}, now());
     </insert>
 
     <select id="selectReview" parameterType="int" resultType="VideoReview">
         SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
-        FROM Reviews
+        FROM reviews
         WHERE reviewSeq = #{reviewSeq}
     </select>
  
     <select id="selectReviewList" resultType="VideoReview">
         SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
-        FROM Reviews
+        FROM reviews
     </select>
 
     <select id="selectReviewListByVideoSeq" parameterType="int" resultType="VideoReview">
         SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
-        FROM Reviews
+        FROM reviews
         WHERE videoSeq = #{videoSeq}
     </select>
 
     <select id="selectReviewListByUserSeq" parameterType="int" resultType="VideoReview">
         SELECT reviewSeq, userSeq, videoSeq, title, content, writer, viewCnt, DATE_FORMAT(createdDate, "%Y:%m:%d %H:%i:%s") AS createdDate
-        FROM Reviews
+        FROM reviews
         WHERE userSeq = #{userSeq}
     </select>
 
     <update id="modifyReview" parameterType="VideoReview">
-        UPDATE Reviews
+        UPDATE reviews
         SET title = #{title}, content = #{content}
         WHERE reviewSeq = #{reviewSeq}
     </update>
 
     <delete id="removeReview" parameterType="int">
-        DELETE FROM Reviews
+        DELETE FROM reviews
         WHERE reviewSeq = #{reviewSeq}
     </delete>
 
     <update id="addViewCnt" parameterType="int">
-        UPDATE Reviews
+        UPDATE reviews
         SET viewCnt = viewCnt + 1
         WHERE reviewSeq = #{reviewSeq}
     </update>
