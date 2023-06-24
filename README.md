@@ -7,6 +7,8 @@
 </br>
 
 ### ✅ 영상 플랫폼, 각종 운동 API와 데이터를 활용한 종합 풋살/축구 서비스
+
+- https://ssaccer.netlify.app/
  
  
 </br>
@@ -51,6 +53,14 @@
 - 2023.05.18(목) ~ 2023.05.26(금) 
 	
     - 9일간 진행
+
+</br></br>
+
+******************** <span style="color:blue">**추가**</span> ********************
+
+- 6월 방학기간을 이용하여 배포 완료 
+
+<hr>
 
 </br></br>
 
@@ -173,6 +183,20 @@
 - Notion
 
 - Discord
+
+</br>
+
+#### 배포 (프로젝트 종료 후 추가 개발)
+
+- front : netlify로 https 배포
+
+- back : AWS EC2로 http server 배포
+
+	- 가비아를 활용하여 custom domain 구입)	 
+
+- database : AWS RDS로 database server 배포
+
+- ec2로 배포한 http server를 https로 변환하기 위해 AWS EC2 target group / loadbalancer, AWS Certificate Manager, Route 53 등 활용용
 
 </br></br>
 
