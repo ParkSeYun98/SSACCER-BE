@@ -192,7 +192,8 @@
 
 - back : AWS EC2로 http server 배포
 
-	- 가비아를 활용하여 custom domain 구입)	 
+	- 가비아를 활용하여 custom domain 구입)
+   	- 탄력적 ip 활용
 
 - database : AWS RDS로 database server 배포
 
